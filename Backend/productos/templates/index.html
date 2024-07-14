@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} Tienda de productos {% endblock %}
+
+{% block content %} 
+
+<div class="row">
+    <div class="col-8">
+        <div class="row" style="padding: 10px 0;">
+            <div class="col-12">
+                <div class="row">
+                    {% for producto in productos %}
+                        <div class="col-6">
+                            <div class="card" style='height: 14rem; width: 23rem; margin: 5px 0px;'>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{producto.nombre_producto}}</h3>
+                                    <p class="card-text">Tipo: {{producto.tipo_producto}}</p>
+                                    <p class="card-text">Descripción: {{producto.descripcion}}</p>
+                                    <p class="card-text">Precio: ${{producto.precio_unidad}}</p>
+                                    <a href="{% url 'agregar-producto' producto.id_producto %}" class="btn btn-primary">Agregar al carrito</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
