@@ -1,16 +1,43 @@
 {% extends 'base.html' %}
 
-{% block title %} Trabaja con nosotros! {% endblock %}
+{% block title %} Contactanos {% endblock %}
 
 {% block content %} 
 
-<div class="container mt-5">
-    <h1>Formulario de postulación</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Enviar</button>
-    </form>
+<div class="container px-4 px-lg-5 my-5">
+    <div class="text-center">
+        <h1 class="display-4 fw-bolder">Contáctanos</h1>
+        <p class="lead fw-normal text-black-50 mb-0">Déjanos saber qué moneda virtual te gustaría que vendiéramos</p>
+    </div>
 </div>
+
+<section class="py-5">
+    <div id="contenido" class="container mt-5">
+        <h2 class="mb-4">Formulario de Contacto</h2>
+        <form id="contactForm" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_nombre_completo" class="form-label">Nombre Completo</label>
+                {{ form.nombre_completo }}
+            </div>
+            <div class="mb-3">
+                <label for="id_correo" class="form-label">Email</label>
+                {{ form.correo }}
+            </div>
+            <div class="mb-3">
+                <label for="id_telefono" class="form-label">Teléfono</label>
+                {{ form.telefono }}
+            </div>
+            <div class="mb-3">
+                <label for="id_tipo_moneda" class="form-label">¿Qué moneda virtual te gustaría que vendiéramos?</label>
+                {{ form.tipo_moneda }}
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+                <button type="reset" class="btn btn-secondary">Limpiar</button>
+            </div>
+        </form>
+    </div>
+</section>
 
 {% endblock %}

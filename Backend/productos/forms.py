@@ -5,25 +5,10 @@ from .models import *
 class ContactoForm(forms.ModelForm):
     class Meta:
         model = Contacto
-        fields = [
-            'nombres', 
-            'apellido_paterno', 
-            'apellido_materno', 
-            'rut', 
-            'telefono', 
-            'correo', 
-            'curriculum', 
-            'jornada', 
-            'comentarios'
-        ]
+        fields = ['nombre_completo', 'correo', 'telefono', 'tipo_moneda']
         widgets = {
-            'nombres': forms.TextInput(attrs={'class': 'form-control'}),
-            'apellido_paterno': forms.TextInput(attrs={'class': 'form-control'}),
-            'apellido_materno': forms.TextInput(attrs={'class': 'form-control'}),
-            'rut': forms.TextInput(attrs={'class': 'form-control'}),
-            'telefono': forms.TextInput(attrs={'class': 'form-control'}),
-            'correo': forms.EmailInput(attrs={'class': 'form-control'}),
-            'curriculum': forms.FileInput(attrs={'class': 'form-control'}),
-            'jornada': forms.Select(attrs={'class': 'form-control'}),
-            'comentarios': forms.Textarea(attrs={'class': 'form-control'}),
+            'nombre_completo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre completo'}),
+            'correo': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Correo electrónico'}),
+            'telefono': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Teléfono'}),
+            'tipo_moneda': forms.Select(attrs={'class': 'form-select'}),
         }

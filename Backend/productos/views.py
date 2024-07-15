@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import *
 from carrito.carrito import Carrito
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -17,7 +18,7 @@ def agregar_producto(request, pk):
     carrito = Carrito(request)
     producto = Producto.objects.get(id_producto=pk)
     carrito.agregar_producto(producto)
-    return redirect('index')
+    return HttpResponse(status=204)
 
 def aumentar_producto(request, pk):
     carrito = Carrito(request)
@@ -44,7 +45,7 @@ def limpiar_carrito(request):
 
 def formulario_contacto(request):
     if request.method == 'POST':
-        form = (request.POST, request.FILES)
+        form = ContactoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('formulario-enviado') 
@@ -53,12 +54,23 @@ def formulario_contacto(request):
     context = {
         'form': form
     }
-    return render(request,'formulario_contacto.html',context)
+    return render(request, 'formulario_contacto.html', context)
 
 def compra_realizada(request):
-    context={}
-    return render(request,'compra_realizada.html',context)
+    carrito = Carrito(request)
+    carrito.limpiar_carrito()
+    return render(request,'compra_realizada.html')
 
 def formulario_exitoso(request):
     context={}
     return render(request,'formulario_exitoso.html',context)
+
+def productos_tibia(request):
+    productos = Producto.objects.all()
+    context={'productos':productos}
+    return render(request,'productos_tibia.html',context)
+
+def productos_wow(request):
+    productos = Producto.objects.all()
+    context={'productos':productos}
+    return render(request,'productos_wow.html',context)

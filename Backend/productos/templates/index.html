@@ -1,32 +1,116 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %} Tienda de productos {% endblock %}
 
 {% block content %} 
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{% static 'img/tibia.jpg' %}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'img/imagen1.png' %}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'img/imagen2.png' %}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'img/imagen3.jpg' %}" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
 
-<div class="row">
-    <div class="col-8">
-        <div class="row" style="padding: 10px 0;">
-            <div class="col-12">
-                <div class="row">
-                    {% for producto in productos %}
-                        <div class="col-6">
-                            <div class="card" style='height: 14rem; width: 23rem; margin: 5px 0px;'>
-                                <div class="card-body">
-                                    <h5 class="card-title">{{producto.nombre_producto}}</h3>
-                                    <p class="card-text">Tipo: {{producto.tipo_producto}}</p>
-                                    <p class="card-text">Descripción: {{producto.descripcion}}</p>
-                                    <p class="card-text">Precio: ${{producto.precio_unidad}}</p>
-                                    <a href="{% url 'agregar-producto' producto.id_producto %}" class="btn btn-primary">Agregar al carrito</a>
+<!-- Section -->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="mb-4 text-center">Productos de Tibia</h2>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for producto in productos %}
+                {% if producto.tipo_producto.desc_tipo_producto == 'Token Tibia' %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            {% if producto.is_oferta %}
+                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                                    Oferta
+                                </div>
+                            {% endif %}
+                            <img class="card-img-top" src="{{ producto.imagen.url }}" alt="{{ producto.nombre_producto }}" />
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">{{ producto.nombre_producto }}</h5>
+                                    {% if producto.is_oferta %}
+                                        <span class="text-muted text-decoration-line-through">${{ producto.precio_unidad }}</span>
+                                        ${{ producto.precio_oferta }}
+                                    {% else %}
+                                        ${{ producto.precio_unidad }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <a class="btn btn-outline-dark mt-auto btn-transition" href="{% url 'agregar-producto' pk=producto.id_producto %}">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
-                    {% endfor %}
-                </div>
-            </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <h2 class="mb-4">Productos de WoW</h2>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for producto in productos %}
+                {% if producto.tipo_producto.desc_tipo_producto == 'Token World of Warcraft' %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            {% if producto.is_oferta %}
+                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                                    Oferta
+                                </div>
+                            {% endif %}
+                            <img class="card-img-top" src="{{ producto.imagen.url }}" alt="{{ producto.nombre_producto }}" />
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">{{ producto.nombre_producto }}</h5>
+                                    {% if producto.is_oferta %}
+                                        <span class="text-muted text-decoration-line-through">${{ producto.precio_unidad }}</span>
+                                        ${{ producto.precio_oferta }}
+                                    {% else %}
+                                        ${{ producto.precio_unidad }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <a class="btn btn-outline-dark mt-auto btn-transition" href="{% url 'agregar-producto' pk=producto.id_producto %}">Añadir al carrito</a>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
-</div>
-
+</section>
 
 {% endblock %}

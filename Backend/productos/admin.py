@@ -5,5 +5,5 @@ from .models import *
 
 admin.site.register(TipoProducto)
 admin.site.register(Producto)
-admin.site.register(Jornada)
+admin.site.register(Tipo_moneda)
 admin.site.register(Contacto)
