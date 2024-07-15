@@ -14,7 +14,7 @@
                 <img src="{% static 'img\worldofwacraft.jpg' %}" alt="wow" class="img-fluid w-100 mb-4">
             </div>
         </div>
-        <h2 class="mb-4">Productos de WoW</h2>
+        <h2 class="mb-4 text-center">Productos de WoW</h2>
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% for producto in productos %}
                 {% if producto.tipo_producto.desc_tipo_producto == 'Token World of Warcraft' %}
@@ -25,7 +25,7 @@
                                     Oferta
                                 </div>
                             {% endif %}
-                            <img class="card-img-top" src="{{ producto.imagen.url }}" alt="{{ producto.nombre_producto }}" />
+                            <img class="card-img-top" src="{{ producto.imagen.url }}" alt="{{ producto.nombre_producto }}" style="height:250px"/>
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <h5 class="fw-bolder">{{ producto.nombre_producto }}</h5>

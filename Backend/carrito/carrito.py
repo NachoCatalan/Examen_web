@@ -13,6 +13,7 @@ class Carrito:
             self.carrito[producto_id] = {
                 'id_producto': producto.id_producto,
                 'nombre': producto.nombre_producto,
+                'imagen': producto.imagen,
                 'cantidad': 1,
                 'precio_unidad': producto.precio_unidad,
                 'total': producto.precio_unidad
