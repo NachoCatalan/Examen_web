@@ -37,3 +37,13 @@ class Contacto(models.Model):
 
     def __str__(self):
         return f'{self.nombre_completo}'
+    
+class Compra_producto(models.Model):
+    id_compra = models.AutoField(primary_key=True)
+    id_producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    fecha = models.DateField(null=True)
+    monto_total = models.IntegerField(null=True)
+    
+    def __int__(self):
+        return {self.id_compra}
+    
